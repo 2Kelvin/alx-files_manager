@@ -5,20 +5,20 @@ class RedisClient {
   constructor() {
     // creating a redis client
     this.client = createClient();
-    this.aliveClient = true;
+    this.redisAlive = true;
 
     this.client.on('error', (err) => {
-      this.aliveClient = false;
+      this.redisAlive = false;
       console.log(err);
     });
     this.client.on('connect', () => {
-      this.aliveClient = true;
+      this.redisAlive = true;
     });
   }
 
   // check if redis connected successfully
   isAlive() {
-    return this.aliveClient;
+    return this.redisAlive;
   }
 
   // get the redis value for the passed in key
