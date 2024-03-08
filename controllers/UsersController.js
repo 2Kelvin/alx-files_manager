@@ -25,7 +25,7 @@ export default class UsersController {
     const addedUser = await (await dbClient.usersCollection()).insertOne({
       email, password: sha1(password),
     });
-    const addedUserId = addedUser.insertedID.toString();
+    const addedUserId = `${addedUser.insertedId}`;
     res.status(201).json({ email, id: addedUserId });
   }
 }
