@@ -28,4 +28,10 @@ export default class UsersController {
     const addedUserId = `${addedUser.insertedId}`;
     res.status(201).json({ email, id: addedUserId });
   }
+
+  // retrieve a user based on a token
+  static async getMe(req, res) {
+    const { user } = req;
+    res.status(200).json({ email: user.email, id: user._id.toString() });
+  }
 }
