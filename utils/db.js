@@ -26,6 +26,11 @@ class DBClient {
     return this.mongoAlive;
   }
 
+  // property users collection
+  async usersCollection() {
+    return this.mongoDbClient.db(this.database).collection('users');
+  }
+
   // count the number of documents in users collection
   async nbUsers() {
     await this.mongoDbClient.connect();
@@ -33,6 +38,11 @@ class DBClient {
     const usersCollection = this.mongoDbClient.db(this.database).collection('users');
     const usersDocsCount = await usersCollection.countDocuments();
     return usersDocsCount;
+  }
+
+  // property files collection
+  async filesCollection() {
+    return this.mongoDbClient.db(this.database).collection('users');
   }
 
   // count the number of documents in files collection
