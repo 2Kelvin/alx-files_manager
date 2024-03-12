@@ -42,7 +42,7 @@ class DBClient {
 
   // property files collection
   async filesCollection() {
-    return this.mongoDbClient.db(this.database).collection('users');
+    return this.mongoDbClient.db(this.database).collection('files');
   }
 
   // count the number of documents in files collection

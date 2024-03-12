@@ -87,12 +87,12 @@ export default class FilesController {
         return;
       }
     }
-    const usrId = user._id.toString();
+    const userId = user._id.toString();
     const baseDir = `${process.env.FOLDER_PATH || ''}`
       .trim().length > 0 ? process.env.FOLDER_PATH.trim()
       : join(tmpdir(), 'files_manager');
     const fileNew = {
-      userId: new mongoDBCore.BSON.ObjectId(usrId),
+      userId: new mongoDBCore.BSON.ObjectId(userId),
       name,
       type,
       isPublic,
@@ -105,16 +105,15 @@ export default class FilesController {
       await asyncWriteFile(pathLocal, Buffer.from(b64Data, 'base64'));
       fileNew.localPath = pathLocal;
     }
-    const insertionInf = await (await dbClient.filesCollection())
-      .insertOne(fileNew);
+    const insertionInf = await (await dbClient.filesCollection()).insertOne(fileNew);
     const fileId = insertionInf.insertedId.toString();
     if (type === thaFileTypes.image) {
-      const jobName = `Image thumbnail [${usrId}-${fileId}]`;
-      fileQueue.add({ usrId, fileId, name: jobName });
+      const jobName = `Image thumbnail [${userId}-${fileId}]`;
+      fileQueue.add({ usrId: userId, fileId, name: jobName });
     }
     res.status(201).json({
       id: fileId,
-      userId: usrId,
+      userId,
       name,
       type,
       isPublic,
