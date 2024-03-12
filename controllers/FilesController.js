@@ -157,7 +157,7 @@ export default class FilesController {
     };
     const files = await (await (await dbClient.filesCollection()).aggregate([
       { $match: filterFiles },
-      { $sort: { _id: 1 } },
+      { $sort: { _id: -1 } },
       { $skip: page * 20 },
       { $limit: 20 },
       {
@@ -174,7 +174,12 @@ export default class FilesController {
         },
       },
     ])).toArray();
-    res.status(200).json(files);
+    const newFilesArray = files.map((oneFile) => ({
+      ...oneFile,
+      id: oneFile._id,
+      _id: undefined,
+    }));
+    res.status(200).json(newFilesArray);
   }
 
   // putPublish method
