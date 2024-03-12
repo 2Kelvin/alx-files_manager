@@ -92,7 +92,7 @@ export default class FilesController {
       .trim().length > 0 ? process.env.FOLDER_PATH.trim()
       : join(tmpdir(), 'files_manager');
     const fileNew = {
-      usrId: new mongoDBCore.BSON.ObjectId(usrId),
+      userId: new mongoDBCore.BSON.ObjectId(usrId),
       name,
       type,
       isPublic,
