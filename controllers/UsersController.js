@@ -17,7 +17,7 @@ export default class UsersController {
 
     // checking if the user email already exists in the database
     if (userEmail) {
-      res.status(400).json({ error: 'Already exists' });
+      res.status(400).json({ error: 'Already exist' });
       return;
     }
 
