@@ -174,12 +174,7 @@ export default class FilesController {
         },
       },
     ])).toArray();
-    const newFilesArray = files.map((oneFile) => ({
-      ...oneFile,
-      id: oneFile._id,
-      _id: undefined,
-    }));
-    res.status(200).json(newFilesArray);
+    res.status(200).json(files);
   }
 
   // putPublish method
