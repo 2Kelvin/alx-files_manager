@@ -16,7 +16,7 @@ export async function getAuthorizedUser(req) {
   const colIdx = tken.indexOf(':');
   const email = tken.substring(0, colIdx);
   const pswd = tken.substring(colIdx + 1);
-  const usr = await (await dbClient.usersCollection().findOne({ email }));
+  const usr = await (await dbClient.usersCollection()).findOne({ email });
 
   if (!usr || sha1(pswd) !== usr.password) {
     return null;
