@@ -56,7 +56,7 @@ export default class FilesController {
     const name = req.body.name || null;
     const type = req.body.type || null;
     const parentId = req.body.parentId || 0;
-    const isPublic = req.body.idPublic || false;
+    const isPublic = req.body.isPublic || false;
     const b64Data = req.body.data || '';
 
     if (!name) {
@@ -114,7 +114,7 @@ export default class FilesController {
     }
     res.status(201).json({
       id: fileId,
-      usrId,
+      userId: usrId,
       name,
       type,
       isPublic,
